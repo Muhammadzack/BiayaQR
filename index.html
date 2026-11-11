@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102522">
+  <title>BiayaQR — Bandingkan biaya beli kripto via QRIS</title>
+  <style>
+    :root{--ink:#102522;--muted:#65716d;--paper:#f6f7f1;--card:#fff;--line:#dfe5dc;--green:#b9f36a;--deep:#173b34;--mint:#e8f3df;--orange:#f0a45a;--rose:#ba5949;--shadow:0 16px 45px rgba(25,48,41,.08)}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}button,input{font:inherit}a{color:inherit}
+    .shell{max-width:1120px;margin:auto;padding:0 28px}.topbar{padding:24px 0;border-bottom:1px solid rgba(16,37,34,.1)}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:800;letter-spacing:-.04em}.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--green);display:grid;place-items:center;color:var(--deep);font-weight:900;font-size:18px}.top-note{font-size:12px;color:var(--muted);border:1px solid var(--line);background:#ffffffa8;padding:7px 11px;border-radius:999px}
+    .hero{padding:54px 0 34px;display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:end}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#456750;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:#7dba56;box-shadow:0 0 0 4px #dff0cf}.hero h1{font-size:clamp(38px,5vw,64px);line-height:.99;letter-spacing:-.065em;margin:16px 0 18px;max-width:700px}.hero h1 span{color:#659052}.hero p{color:var(--muted);font-size:16px;max-width:620px;margin:0}.hero-aside{background:var(--deep);color:#f3f7ef;padding:23px 24px;border-radius:20px;box-shadow:var(--shadow)}.hero-aside .label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#c2d1c8;font-weight:800}.hero-aside strong{display:block;font-size:20px;letter-spacing:-.03em;margin:10px 0 7px}.hero-aside p{color:#c2d1c8;font-size:13px;margin:0}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.controls{padding:24px;margin:10px 0 22px}.section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px}.section-head h2{font-size:19px;letter-spacing:-.035em;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;background:#eff4e8;color:#54733e;padding:7px 10px;white-space:nowrap}.form-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px}.field label{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:750;margin-bottom:7px}.field label span{font-size:11px;font-weight:500;color:var(--muted)}.input-wrap{position:relative}.prefix{position:absolute;top:50%;left:13px;transform:translateY(-50%);color:#707c75;font-size:13px;font-weight:700}.field input{width:100%;border:1px solid #d9e0d8;border-radius:12px;background:#fbfcf9;padding:12px 13px;color:var(--ink);outline:none;transition:.15s}.field .money{padding-left:43px}.field input:focus{border-color:#6d9a56;box-shadow:0 0 0 3px #e5f3d9}.field small{display:block;font-size:11px;color:var(--muted);margin-top:6px}.assumption{margin-top:16px;background:#f7f8f2;border-radius:12px;padding:11px 13px;color:#626f68;font-size:12px;display:flex;gap:9px;align-items:flex-start}.assumption b{color:#35463f}
+    .compare-head{display:flex;justify-content:space-between;align-items:end;margin:27px 2px 13px;gap:16px}.compare-head h2{margin:0;font-size:20px;letter-spacing:-.04em}.compare-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.live{display:flex;align-items:center;gap:7px;color:#5a7461;font-size:11px;font-weight:700}.live i{display:block;width:7px;height:7px;border-radius:50%;background:#78b44f}.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.exchange{padding:21px 22px 18px;position:relative;overflow:hidden}.exchange.best{border-color:#9acb6c;box-shadow:0 15px 35px rgba(84,139,52,.12)}.exchange.best:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#8fc853}.ex-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.ex-name{font-size:18px;font-weight:850;letter-spacing:-.04em}.ex-sub{font-size:11px;color:var(--muted);margin-top:2px}.best-pill{background:var(--green);color:#254122;font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:6px 9px;display:none}.exchange.best .best-pill{display:inline-block}.fee-line{display:flex;justify-content:space-between;align-items:center;margin:21px 0 13px;padding:11px 12px;background:#f5f7f2;border-radius:11px}.fee-line span{font-size:12px;color:var(--muted)}.fee-line strong{font-size:14px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:10px 11px;border:1px solid #e9ece7;border-radius:11px;min-height:65px}.stat .k{font-size:10px;color:var(--muted);margin-bottom:5px}.stat .v{font-size:14px;font-weight:800;letter-spacing:-.02em}.stat.emphasis{background:#f4f9ed;border-color:#e1ecd7}.trade-input{margin-top:14px;display:grid;grid-template-columns:1fr 120px;gap:12px;align-items:center}.trade-input label{font-size:12px;font-weight:700}.trade-input label small{display:block;font-weight:400;color:var(--muted);font-size:10px;margin-top:2px}.trade-input input{width:100%;border:1px solid #d9e0d8;border-radius:10px;padding:9px 10px;text-align:right;background:#fbfcf9;outline:none}.trade-input input:focus{border-color:#6d9a56;box-shadow:0 0 0 3px #e5f3d9}.unit{font-size:10px;color:var(--muted);display:block;text-align:right;margin-top:3px}.mini-warning{font-size:10px;color:#a56b28;min-height:15px;margin-top:6px}
+    .explain{margin:17px 0 4px;padding:0;border:0;background:none;color:#466a3e;font-size:12px;font-weight:800;cursor:pointer}.explain:hover{text-decoration:underline}.reason-box{display:none;margin-top:12px;border-radius:12px;background:#f2f7ed;padding:13px 14px;font-size:12px;color:#33443a;white-space:pre-wrap}.reason-box.visible{display:block}.reason-head{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.09em;color:#688354;margin-bottom:7px}.reason-box.error{background:#fcf1e8;color:#79521f}
+    .footnotes{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin:16px 0 48px}.note-card{padding:19px 21px}.note-card h3{font-size:13px;margin:0 0 8px;letter-spacing:-.02em}.note-card p,.note-card li{font-size:11px;color:var(--muted);line-height:1.55}.note-card p{margin:0}.note-card ul{margin:8px 0 0;padding-left:17px}.note-card li+li{margin-top:5px}.sources a{color:#416f38;text-decoration:none;font-weight:700}.sources a:hover{text-decoration:underline}.footer{border-top:1px solid var(--line);padding:19px 0 27px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:16px}.footer strong{color:#31443a}
+    @media(max-width:760px){.shell{padding:0 17px}.topbar{padding:16px 0}.top-note{font-size:10px;padding:6px 9px}.hero{padding:36px 0 22px;grid-template-columns:1fr;gap:20px}.hero h1{font-size:44px}.hero p{font-size:14px}.hero-aside{padding:18px 19px}.controls{padding:18px}.form-grid{grid-template-columns:1fr 1fr}.field:first-child{grid-column:1/-1}.cards{grid-template-columns:1fr}.exchange{padding:19px}.footnotes{grid-template-columns:1fr;margin-bottom:30px}.compare-head{align-items:start;flex-direction:column;gap:9px}.footer{flex-direction:column}.section-head{align-items:flex-start}.tag{font-size:9px}}
+    @media(max-width:400px){.hero h1{font-size:39px}.form-grid{grid-template-columns:1fr}.field:first-child{grid-column:auto}.trade-input{grid-template-columns:1fr 108px}}
+  </style>
+  <style>
+    .market-panel{padding:22px;margin:12px 0 22px}.market-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}.market-card{border:1px solid var(--line);background:#fbfcf9;border-radius:15px;padding:17px;min-width:0}.market-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#5d7863;font-weight:850}.market-big{font-size:29px;font-weight:900;line-height:1.15;letter-spacing:-.05em;margin:11px 0 5px}.market-big small{font-size:13px;letter-spacing:0;font-weight:750;display:block;margin-top:3px}.market-meta{font-size:13px;font-weight:800;color:#32483a;margin:7px 0}.market-audience{font-size:11px;color:var(--muted);margin:10px 0}.market-duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.market-duo>div{padding:10px;background:#fff;border:1px solid #e9ece7;border-radius:10px}.market-duo span{display:block;font-size:10px;color:var(--muted)}.market-duo strong{display:block;font-size:14px;margin:3px 0}.market-duo em{font-style:normal;font-size:10px;color:var(--muted)}.market-cumulative{font-size:11px;padding:9px 10px;background:#f4f9ed;border-radius:10px;margin-top:9px}.market-source{display:inline-block;font-size:10px;color:#416f38;font-weight:800;margin-top:12px;text-decoration:none}.market-source:hover{text-decoration:underline}.market-explainer{margin:13px 0 0;padding-top:13px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+    @media(max-width:760px){.market-panel{padding:18px}.market-grid{grid-template-columns:1fr}.market-card{padding:15px}}
+    @media(max-width:400px){.market-duo{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="shell nav"><div class="brand"><div class="brand-mark">₿</div><span>BiayaQR</span></div><div class="top-note">Asia-first · MVP Prototype</div></div></header>
+  <main class="shell">
+    <section class="hero">
+      <div><div class="eyebrow"><i class="dot"></i> Cek biaya sebelum beli · mulai dari Indonesia</div><h1>QRIS masuk.<br><span>Biaya jangan samar.</span></h1><p>MVP Asia-first: bandingkan biaya QRIS domestik Indonesia, lalu lihat konteks konektivitas pembayaran lintas negara ASEAN—dengan cakupan statistik yang tetap dipisahkan.</p></div>
+      <aside class="hero-aside"><div class="label">Yang dibandingkan</div><strong>Biaya masuk + asumsi trading</strong><p>Biaya deposit memakai data resmi. Tarif trading tidak ditebak—isi sendiri jika sudah tahu.</p></aside>
+    </section>
+
+    <section class="panel market-panel" aria-labelledby="market-title">
+      <div class="section-head"><div><h2 id="market-title">Market scale · Asia-first dari Indonesia</h2><p>QRIS adalah standar QR nasional Indonesia; hanya beberapa sistem mitra yang terhubung lintas negara.</p></div><div class="tag">Indonesia ↔ ASEAN</div></div>
+      <div class="market-grid">
+        <article class="market-card">
+          <div class="market-kicker">QRIS domestik · Indonesia · Semester I 2026</div>
+          <div class="market-big">12,55 <small>miliar transaksi</small></div>
+          <div class="market-meta">≈ Rp600,7 triliun nilai transaksi</div>
+          <div class="market-audience">Lebih dari 66 juta pengguna · hampir 45 juta merchant</div>
+          <a class="market-source" href="https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_2819026.aspx" target="_blank" rel="noopener">Bank Indonesia · 15 Sep 2026 ↗</a>
+        </article>
+        <article class="market-card">
+          <div class="market-kicker">Indonesia · QRIS antarnegara · Triwulan I 2026</div>
+          <div class="market-duo">
+            <div><span>Inbound · wisatawan asing di Indonesia</span><strong>2,79 juta transaksi</strong><em>Naik 222% vs. Triwulan I 2025 · Rp713,59 miliar</em></div>
+            <div><span>Outbound · warga Indonesia di luar negeri</span><strong>737.647 transaksi</strong><em>Rp249,26 miliar</em></div>
+          </div>
+          <div class="market-cumulative"><b>Sejak diluncurkan pada 2020 hingga Triwulan I 2026:</b> 31 miliar transaksi QRIS · Rp2.970 triliun nilai kumulatif.</div>
+          <a class="market-source" href="https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_288926.aspx" target="_blank" rel="noopener">Bank Indonesia · 30 Apr 2026 ↗</a>
+        </article>
+        <article class="market-card">
+          <div class="market-kicker">ASEAN + mitra eksternal · per Desember 2025</div>
+          <div class="market-big">29 <small>koneksi pembayaran QR dan P2P instan</small></div>
+          <div class="market-audience">Jalur pembayaran lintas negara di dalam ASEAN dan dengan mitra eksternal.</div>
+          <div class="market-meta">QR lintas negara ASEAN sepanjang 2025: 36,2 juta transaksi · USD 716,4 juta</div>
+          <a class="market-source" href="https://asean.org/wp-content/uploads/2026/04/13th-AFMGM-JS_Adopted_20260410.pdf" target="_blank" rel="noopener">Pernyataan bersama ASEAN · 10 Apr 2026 ↗</a>
+        </article>
+      </div>
+      <p class="market-explainer">Cakupan berbeda—jangan dijumlahkan: kartu 1 adalah QRIS domestik Indonesia (Semester I 2026); kartu 2 adalah QRIS antarnegara Indonesia, inbound/outbound (Triwulan I 2026); kartu 3 memuat 29 koneksi QR+P2P lintas negara di ASEAN dan mitranya per Desember 2025, serta transaksi QR lintas negara ASEAN sepanjang 2025. Angka ASEAN bukan seluruh pembayaran QR di Asia dan bukan seluruh transaksi QRIS.</p>
+    </section>
+
+    <section class="panel controls" aria-labelledby="input-title">
+      <div class="section-head"><div><h2 id="input-title">Atur skenario pembelian</h2><p>Gunakan nominal top-up yang sama agar perbandingan setara.</p></div><div class="tag">Kalkulasi transparan</div></div>
+      <div class="form-grid">
+        <div class="field"><label for="amount">Nominal deposit <span>dana masuk ke saldo</span></label><div class="input-wrap"><span class="prefix">Rp</span><input class="money" id="amount" type="number" inputmode="numeric" min="10000" step="10000" value="500000" aria-describedby="amount-help"></div><small id="amount-help">Biaya QRIS ditambahkan di atas nominal ini.</small></div>
+        <div class="field"><label for="price">Harga aset <span>opsional</span></label><div class="input-wrap"><span class="prefix">Rp</span><input class="money" id="price" type="number" inputmode="decimal" min="0" step="any" placeholder="mis. harga per koin"></div><small>Isi harga yang sama untuk estimasi jumlah koin.</small></div>
+        <div class="field"><label for="asset">Nama aset <span>opsional</span></label><input id="asset" type="text" maxlength="16" placeholder="mis. BTC" autocomplete="off"><small>Dipakai hanya sebagai label hasil estimasi.</small></div>
+      </div>
+      <div class="assumption"><span>ⓘ</span><div><b>Asumsi utama:</b> biaya deposit dibayar di atas nominal top-up; tarif trading dipotong dari nilai rupiah yang dibelikan. Jika mekanisme bursa berbeda, gunakan ini sebagai estimasi dan sesuaikan tarif trading.</div></div>
+    </section>
+
+    <div class="compare-head"><div><h2>Hasil perbandingan</h2><p>Tarif deposit berdasarkan informasi resmi yang ditautkan di bawah.</p></div><div class="live"><i></i>Hitung otomatis · tanpa harga pasar langsung</div></div>
+    <section class="cards" aria-live="polite">
+      <article class="panel exchange" id="card-toko">
+        <div class="ex-top"><div><div class="ex-name">Tokocrypto</div><div class="ex-sub">Deposit QRIS · biaya tetap sesuai tarif sumber</div></div><span class="best-pill">Biaya lebih rendah</span></div>
+        <div class="fee-line"><span>Biaya deposit QRIS</span><strong id="toko-deposit-fee">—</strong></div>
+        <div class="stats">
+          <div class="stat"><div class="k">Total yang dibayar</div><div class="v" id="toko-total">—</div></div>
+          <div class="stat"><div class="k">Estimasi biaya trading</div><div class="v" id="toko-trade-cost">—</div></div>
+          <div class="stat emphasis"><div class="k">Nilai untuk membeli</div><div class="v" id="toko-buy-value">—</div></div>
+          <div class="stat"><div class="k">Total biaya efektif</div><div class="v" id="toko-effective">—</div></div>
+          <div class="stat coin-stat" style="display:none"><div class="k">Estimasi jumlah aset</div><div class="v" id="toko-coins">—</div></div>
+        </div>
+        <div class="trade-input"><label for="toko-trade">Biaya trading<small>Isi tarif yang berlaku di akunmu</small></label><div><input id="toko-trade" type="number" min="0" max="100" step="0.01" placeholder="0.00" inputmode="decimal"><span class="unit">persen (%)</span></div></div>
+        <div class="mini-warning" id="toko-warning"></div>
+        <button class="explain" data-explain="toko">✳ Jelaskan perhitungan dengan SERV Reasoning</button>
+        <div class="reason-box" id="toko-reason" role="status"></div>
+      </article>
+      <article class="panel exchange" id="card-indo">
+        <div class="ex-top"><div><div class="ex-name">INDODAX</div><div class="ex-sub">QRIS · gratis hingga Rp100 ribu, lalu 0,7%</div></div><span class="best-pill">Biaya lebih rendah</span></div>
+        <div class="fee-line"><span>Biaya deposit QRIS</span><strong id="indo-deposit-fee">—</strong></div>
+        <div class="stats">
+          <div class="stat"><div class="k">Total yang dibayar</div><div class="v" id="indo-total">—</div></div>
+          <div class="stat"><div class="k">Estimasi biaya trading</div><div class="v" id="indo-trade-cost">—</div></div>
+          <div class="stat emphasis"><div class="k">Nilai untuk membeli</div><div class="v" id="indo-buy-value">—</div></div>
+          <div class="stat"><div class="k">Total biaya efektif</div><div class="v" id="indo-effective">—</div></div>
+          <div class="stat coin-stat" style="display:none"><div class="k">Estimasi jumlah aset</div><div class="v" id="indo-coins">—</div></div>
+        </div>
+        <div class="trade-input"><label for="indo-trade">Biaya trading<small>Isi tarif yang berlaku di akunmu</small></label><div><input id="indo-trade" type="number" min="0" max="100" step="0.01" placeholder="0.00" inputmode="decimal"><span class="unit">persen (%)</span></div></div>
+        <div class="mini-warning" id="indo-warning"></div>
+        <button class="explain" data-explain="indo">✳ Jelaskan perhitungan dengan SERV Reasoning</button>
+        <div class="reason-box" id="indo-reason" role="status"></div>
+      </article>
+    </section>
+
+    <section class="footnotes">
+      <article class="panel note-card"><h3>Angka resmi & batas transaksi</h3><ul class="sources"><li><a href="https://support.tokocrypto.com/hc/id/articles/44062161904653-Tokocrypto-Hadirkan-Layanan-Deposit-Melalui-QRIS" target="_blank" rel="noopener">Tokocrypto: biaya deposit QRIS 2%; minimum deposit Rp10.000</a> (artikel diperbarui 2 Nov 2026).</li><li><a href="https://help.indodax.com/hc/id/articles/4416646599705-Rincian-Biaya-Transaksi-di-INDODAX" target="_blank" rel="noopener">INDODAX: QRIS gratis sampai Rp100.000; 0,7% di atasnya</a>, minimum Rp10.000 dan maksimum Rp10.000.000.</li></ul></article>
+      <article class="panel note-card"><h3>Yang belum termasuk / perlu dicek</h3><p>Biaya trading bervariasi dan tidak diisi otomatis. Masukkan tarif akunmu; 0% sementara hanya asumsi, bukan tarif resmi. Struktur biaya INDODAX disebut all-in sejak 1 Okt 2026, tetapi halaman tersebut tidak memberi satu tarif trading tetap. Spread, perubahan harga, batas metode pembayaran, dan kondisi akun tidak dihitung.</p></article>
+    </section>
+    <footer class="footer"><div><strong>BiayaQR</strong> · demo kalkulator, bukan rekomendasi membeli aset.</div><div>Data & tarif dapat berubah; selalu cek sumber resmi sebelum transaksi.</div></footer>
+  </main>
+<script>
+  const rupiah = new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0});
+  const nfmt = new Intl.NumberFormat('id-ID',{maximumFractionDigits:8});
+  const amountEl=document.getElementById('amount'),priceEl=document.getElementById('price'),assetEl=document.getElementById('asset');
+  const exchanges={
+    toko:{id:'toko',depositRate:.02,min:10000,max:null,depositLabel:'2% dari nominal deposit'},
+    indo:{id:'indo',min:10000,max:10000000,depositLabel:'Gratis ≤ Rp100.000; 0,7% di atasnya'}
+  };
+  function getCalc(key){
+    const ex=exchanges[key],amount=Number(amountEl.value)||0,tradeInput=document.getElementById(key+'-trade'),rawTrade=tradeInput.value.trim(),tradePct=rawTrade===''?0:Number(rawTrade),tradeRate=Math.max(0,Math.min(100,tradePct))/100;
+    const valid=amount>=ex.min&&(ex.max===null||amount<=ex.max),depositRate=key==='toko'?ex.depositRate:(amount>100000?.007:0),depositCost=amount*depositRate,tradeCost=amount*tradeRate,buyValue=Math.max(0,amount-tradeCost),total=amount+depositCost,effectivePct=total?((depositCost+tradeCost)/total*100):0,price=Number(priceEl.value)||0,coins=price>0?buyValue/price:null;
+    return {key,amount,rawTrade,tradePct,tradeRate,valid,depositRate,depositCost,tradeCost,buyValue,total,effectivePct,price,coins};
+  }
+  function render(key){
+    const c=getCalc(key),p=key+'-';
+    document.getElementById(p+'deposit-fee').textContent=rupiah.format(c.depositCost)+' · '+(c.depositRate*100).toLocaleString('id-ID',{maximumFractionDigits:2})+'%';
+    document.getElementById(p+'total').textContent=rupiah.format(c.total);
+    document.getElementById(p+'trade-cost').textContent=rupiah.format(c.tradeCost)+(c.rawTrade===''?'*':'');
+    document.getElementById(p+'buy-value').textContent=rupiah.format(c.buyValue);
+    document.getElementById(p+'effective').textContent=c.effectivePct.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2})+'% dari total dibayar';
+    const coinStat=document.querySelector('#card-'+(key==='toko'?'toko':'indo')+' .coin-stat');
+    if(c.coins!==null){coinStat.style.display='block';document.getElementById(p+'coins').textContent=nfmt.format(c.coins)+' '+(assetEl.value.trim().toUpperCase()||'aset');}else{coinStat.style.display='none'}
+    const warning=document.getElementById(p+'warning');
+    if(!c.valid){warning.textContent=key==='indo'?(c.amount<10000?'Minimum deposit QRIS INDODAX Rp10.000.':'Maksimum deposit QRIS INDODAX Rp10.000.000.'):'Minimum deposit Tokocrypto Rp10.000.'}
+    else if(c.rawTrade==='')warning.textContent='* Biaya trading belum diisi; ditampilkan sebagai asumsi 0%.';
+    else if(c.tradePct>100)warning.textContent='Tarif di atas 100% tidak didukung; kalkulasi dibatasi ke 100%.';
+    else warning.textContent='Tarif trading adalah input asumsi pengguna.';
+    return c;
+  }
+  function renderAll(){const a=render('toko'),b=render('indo');document.getElementById('card-toko').classList.toggle('best',a.valid&&a.total+a.tradeCost<b.total+b.tradeCost);document.getElementById('card-indo').classList.toggle('best',b.valid&&b.total+b.tradeCost<a.total+a.tradeCost);}
+  [amountEl,priceEl,assetEl,document.getElementById('toko-trade'),document.getElementById('indo-trade')].forEach(el=>el.addEventListener('input',renderAll));
+  const numberID=n=>new Intl.NumberFormat('id-ID',{maximumFractionDigits:2}).format(n);
+  function buildPayload(c){return {exchange:c.key==='toko'?'Tokocrypto':'INDODAX',depositIdr:c.amount,depositFeeIdr:c.depositCost,depositFeePercent:c.depositRate*100,tradingFeeInput:c.rawTrade===''?null:c.tradePct,tradingFeeAssumedZero:c.rawTrade==='',estimatedTradingFeeIdr:c.tradeCost,totalPaidIdr:c.total,valueForPurchaseIdr:c.buyValue,effectiveCostPercent:c.effectivePct,asset:assetEl.value.trim()||null,assetPriceIdr:c.price||null,estimatedAssetQuantity:c.coins,validDepositRange:c.valid,methodAssumption:'QRIS deposit fee is paid on top of the deposit amount; trading fee is modeled as deducted from IDR purchase value.',sources:{tokocrypto:'https://support.tokocrypto.com/hc/id/articles/44062161904653-Tokocrypto-Hadirkan-Layanan-Deposit-Melalui-QRIS',indodax:'https://help.indodax.com/hc/id/articles/4416646599705-Rincian-Biaya-Transaksi-di-INDODAX'}}}
+  async function explain(key,button){
+    const c=render(key),box=document.getElementById(key+'-reason');box.className='reason-box visible';box.textContent='Mengirim ringkasan kalkulasi ke SERV Reasoning…';button.disabled=true;
+    try{const res=await fetch('/api/explain',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(buildPayload(c))});const data=await res.json();if(!res.ok)throw new Error(data.error||'Layanan penjelasan belum tersedia.');box.textContent=data.explanation;}
+    catch(err){box.className='reason-box visible error';box.textContent=err.message||'Penjelasan SERV tidak tersedia. Periksa konfigurasi server.';}
+    finally{button.disabled=false}
+  }
+  document.querySelectorAll('[data-explain]').forEach(btn=>btn.addEventListener('click',()=>explain(btn.dataset.explain,btn)));
+  renderAll();
+</script>
+</body>
+</html>
